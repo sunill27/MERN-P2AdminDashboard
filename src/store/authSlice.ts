@@ -18,11 +18,13 @@ interface User {
 export interface AuthState {
   user: User;
   status: Status;
+  token: string | null;
 }
 
 const initialState: AuthState = {
   user: {} as User,
   status: Status.LOADING,
+  token: null,
 };
 
 const authSlice = createSlice({
