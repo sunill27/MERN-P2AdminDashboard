@@ -127,12 +127,28 @@ export function addProduct(data: Product) {
   };
 }
 
-//To add products:
+//To delete products:
 export function deleteProduct(id: string) {
   return async function deleteProductThunk(dispatch: AppDispatch) {
     dispatch(setStatus(Status.LOADING));
     try {
       const response = await APIAuthenticated.delete('/admin/product' + id);
+      if (response.status === 200) {
+        dispatch(setStatus(Status.SUCCESS));
+        dispatch(setUsers(response.data.data));
+      }
+    } catch (error) {
+      dispatch(setStatus(Status.ERROR));
+    }
+  };
+}
+
+//To delete orders:
+export function deleteOrder(id: string) {
+  return async function deleteOrderThunk(dispatch: AppDispatch) {
+    dispatch(setStatus(Status.LOADING));
+    try {
+      const response = await APIAuthenticated.delete('/order/admin' + id);
       if (response.status === 200) {
         dispatch(setStatus(Status.SUCCESS));
         dispatch(setUsers(response.data.data));

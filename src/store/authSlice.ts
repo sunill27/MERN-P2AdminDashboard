@@ -9,10 +9,10 @@ interface LoginData {
 }
 
 interface User {
-  username: string;
-  email: string;
-  password: string;
-  token: string;
+  username: string | null;
+  email: string | null;
+  password: string | null;
+  token: string | null;
 }
 
 export interface AuthState {
@@ -46,11 +46,26 @@ const authSlice = createSlice({
     removeToken(state: AuthState, action: PayloadAction<string>) {
       state.user.token = action.payload;
     },
+    setUserLogout(state: AuthState) {
+      state.token = null;
+      state.user = {
+        email: null,
+        password: null,
+        username: null,
+        token: null,
+      };
+    },
   },
 });
 
-export const { setUser, setStatus, resetStatus, setToken, removeToken } =
-  authSlice.actions;
+export const {
+  setUser,
+  setStatus,
+  resetStatus,
+  setToken,
+  removeToken,
+  setUserLogout,
+} = authSlice.actions;
 export default authSlice.reducer;
 
 export function login(data: LoginData) {

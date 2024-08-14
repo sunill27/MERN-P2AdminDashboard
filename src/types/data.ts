@@ -4,6 +4,7 @@ export interface User {
   id: string;
   email: string;
   username: string;
+  created_at: string;
 }
 
 interface Category {
@@ -12,16 +13,18 @@ interface Category {
 }
 
 export interface Product {
-  id: string;
+  id?: string;
   productName: string;
   productDescription: string;
   productPrice: number;
   productStock: number;
   productImage: string;
-  createdAt: string;
-  updatedAt: string;
-  userId: UserActivation;
-  Category: Category;
+  createdAt?: string;
+  updatedAt?: string;
+  userId: string;
+  categoryId: string;
+  User?: User;
+  Category?: Category;
 }
 
 export enum PaymentMethod {
@@ -53,6 +56,8 @@ export interface OrderData {
   totalAmount: number;
   paymentDetails: Payment;
   items: ItemDetails[];
+  id: string;
+  orderStatus: OrderStatus;
 }
 
 export interface InitialState {
