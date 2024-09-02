@@ -1,22 +1,21 @@
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { deleteOrder, fetchOrders } from '../../store/dataSlice';
-import { OrderStatus } from '../../types/data';
+import { useEffect } from 'react';
+import { deleteCategory, fetchCategories } from '../../store/dataSlice';
 
-const TableThree = () => {
+const TableFour = () => {
   const dispatch = useAppDispatch();
-  const { orders } = useAppSelector((state) => state.data);
+  const { categories } = useAppSelector((state) => state.data);
   useEffect(() => {
-    dispatch(fetchOrders());
+    dispatch(fetchCategories());
   }, []);
   const handleDelete = (id: string) => {
-    dispatch(deleteOrder(id));
+    dispatch(deleteCategory(id));
   };
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Orders
+          Categories
         </h4>
       </div>
       <div className="max-w-full overflow-x-auto">
@@ -26,47 +25,21 @@ const TableThree = () => {
               <th className="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
                 id
               </th>
+
               <th className="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
-                Phone Number
-              </th>
-              <th className="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                Shipping Address
-              </th>
-              <th className="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">
-                Order Status
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody>
-            {orders.length > 0 &&
-              orders.map((order, key) => (
+            {categories.length > 0 &&
+              categories.map((category, key) => (
                 <tr key={key}>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                     <h5 className="font-medium text-black dark:text-white">
-                      {order.id}
+                      {category.id}
                     </h5>
-                    <p className="text-sm">${order.phoneNumber}</p>
-                  </td>
-                  <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                    <p className="text-black dark:text-white">
-                      {order.shippingAddress}
-                    </p>
-                  </td>
-                  <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                    <p
-                      className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
-                        order.orderStatus === OrderStatus.Delivered
-                          ? 'bg-success text-success'
-                          : order.orderStatus === OrderStatus.Cancelled
-                          ? 'bg-danger text-danger'
-                          : 'bg-warning text-warning'
-                      }`}
-                    >
-                      {order.orderStatus}
-                    </p>
+                    <p className="text-sm">${category.categoryName}</p>
                   </td>
 
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
@@ -91,7 +64,7 @@ const TableThree = () => {
                         </svg>
                       </button>
                       <button
-                        onClick={() => handleDelete(order.id)}
+                        onClick={() => handleDelete(category.id)}
                         className="hover:text-primary"
                       >
                         <svg
@@ -150,4 +123,4 @@ const TableThree = () => {
   );
 };
 
-export default TableThree;
+export default TableFour;

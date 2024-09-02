@@ -7,11 +7,6 @@ export interface User {
   created_at: string;
 }
 
-interface Category {
-  id: string;
-  categoryName: string;
-}
-
 export interface Product {
   id?: string;
   productName: string;
@@ -60,10 +55,16 @@ export interface OrderData {
   orderStatus: OrderStatus;
 }
 
+export interface Category {
+  id: string;
+  categoryName: string;
+}
+
 export interface InitialState {
   products: Product[];
   users: User[];
   orders: OrderData[];
   status: Status;
+  categories: Category[];
   singleProduct: Product | null;
 }

@@ -1,14 +1,22 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useEffect } from 'react';
-import { fetchProducts } from '../../store/dataSlice';
+import {
+  deleteProduct,
+  fetchProducts,
+  setDeleteProduct,
+} from '../../store/dataSlice';
 
 const TableTwo = () => {
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.data);
-
   useEffect(() => {
     dispatch(fetchProducts());
-  });
+  }, []);
+
+  const handleDelete = (id: string) => {
+    dispatch(deleteProduct(id));
+    dispatch(setDeleteProduct({ productId: id }));
+  };
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
@@ -31,7 +39,7 @@ const TableTwo = () => {
           <p className="font-medium">Stocks</p>
         </div>
         <div className="col-span-1 flex items-center">
-          <p className="font-medium">Created At</p>
+          <p className="font-medium">Created_at</p>
         </div>
       </div>
 
@@ -58,7 +66,7 @@ const TableTwo = () => {
             </div>
             <div className="col-span-1 flex items-center">
               <p className="text-sm text-black dark:text-white">
-                Rs{product.productPrice}
+                ${product.productPrice}
               </p>
             </div>
             <div className="col-span-1 flex items-center">
@@ -67,7 +75,7 @@ const TableTwo = () => {
               </p>
             </div>
             <div className="col-span-1 flex items-center">
-              <p className="text-sm text-meta-3">{product.createdAt}</p>
+              <p className="text-sm text-meta-3">${product.createdAt}</p>
             </div>
           </div>
         ))}
