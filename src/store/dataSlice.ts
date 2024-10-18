@@ -3,9 +3,12 @@ import {
   Category,
   InitialState,
   OrderData,
+  OrderStatus,
   Product,
+  SingleOrder,
   User,
 } from '../types/data';
+
 import { Status } from '../types/status';
 import { AppDispatch } from './store';
 import { APIAuthenticated } from '../http';
@@ -15,6 +18,7 @@ const initialState: InitialState = {
   products: [],
   users: [],
   categories: [],
+  singleOrder: [],
   status: Status.LOADING,
   singleProduct: null,
 };
@@ -93,6 +97,22 @@ const dataSlice = createSlice({
       );
       state.categories.splice(index, 1);
     },
+
+    setSingleOrder(state: InitialState, action: PayloadAction<SingleOrder[]>) {
+      state.singleOrder = action.payload;
+    },
+    updateOrderStatusById(
+      state: InitialState,
+      action: PayloadAction<{ orderId: string; status: OrderStatus }>,
+    ) {
+      const index = state.singleOrder.findIndex(
+        (order) => (order.id = action.payload.orderId),
+      );
+      if (index !== -1) {
+        state.singleOrder[index].Order.orderStatus = action.payload.status;
+        console.log(action.payload.status, 'STATUS');
+      }
+    },
   },
 });
 
@@ -107,6 +127,8 @@ export const {
   setDeleteProduct,
   setDeleteOrder,
   setDeleteUser,
+  setSingleOrder,
+  updateOrderStatusById,
 } = dataSlice.actions;
 export default dataSlice.reducer;
 
@@ -167,6 +189,7 @@ export function fetchOrders() {
 // }
 
 //To fetch Users:
+
 export function fetchUsers() {
   return async function fetchUsersThunk(dispatch: AppDispatch) {
     dispatch(setStatus(Status.LOADING));
@@ -310,6 +333,44 @@ export function singleProduct(id: string) {
       if (response.status === 200) {
         dispatch(setStatus(Status.SUCCESS));
         dispatch(setSingleProduct(response.data.data));
+      }
+    } catch (error) {
+      dispatch(setStatus(Status.ERROR));
+    }
+  };
+}
+
+//To get single order:
+export function singleOrder(id: string) {
+  return async function singleOrderThunk(dispatch: AppDispatch) {
+    dispatch(setStatus(Status.LOADING));
+    try {
+      const response = await APIAuthenticated.get('/order/customer/' + id);
+      if (response.status === 200) {
+        dispatch(setStatus(Status.SUCCESS));
+        dispatch(setSingleOrder(response.data.data));
+      } else {
+        dispatch(setStatus(Status.ERROR));
+      }
+    } catch (error) {
+      dispatch(setStatus(Status.ERROR));
+    }
+  };
+}
+
+//HandleOrderStatus API:
+export function handleOrderStatusById(status: OrderStatus, id: string) {
+  return async function handleOrderStatusThunk(dispatch: AppDispatch) {
+    dispatch(setStatus(Status.LOADING));
+    try {
+      const response = await APIAuthenticated.patch('/order/admin/' + id, {
+        orderStatus: status,
+      });
+      if (response.status === 200) {
+        dispatch(setStatus(Status.SUCCESS));
+        dispatch(updateOrderStatusById({ orderId: id, status }));
+      } else {
+        dispatch(setStatus(Status.ERROR));
       }
     } catch (error) {
       dispatch(setStatus(Status.ERROR));

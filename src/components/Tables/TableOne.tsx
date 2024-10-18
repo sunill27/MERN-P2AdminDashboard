@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useEffect } from 'react';
-import { deleteUser, fetchUsers, setDeleteUser } from '../../store/dataSlice';
+import { deleteUser, fetchUsers } from '../../store/dataSlice';
 
 const TableOne = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ const TableOne = () => {
       </h4>
 
       <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-4">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">id</h5>
           </div>
@@ -42,7 +42,7 @@ const TableOne = () => {
         {users.length > 0 &&
           users.map((user, key) => (
             <div
-              className={`grid grid-cols-3 sm:grid-cols-5 ${
+              className={`grid grid-cols-3 sm:grid-cols-4 ${
                 key === users.length - 1
                   ? ''
                   : 'border-b border-stroke dark:border-strokedark'
@@ -63,7 +63,7 @@ const TableOne = () => {
                 <p className="text-meta-3">${user.email}</p>
               </div>
 
-              <td className="border-b border-[#eee] ml-20 py-5 px-4 dark:border-strokedark">
+              <td className="border-b border-[#eee] md:ml-20 ml-10 py-10  dark:border-strokedark">
                 <div className="flex items-center space-x-3.5">
                   <button className="hover:text-primary">
                     <svg

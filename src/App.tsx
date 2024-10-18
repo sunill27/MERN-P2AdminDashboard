@@ -18,6 +18,14 @@ import DefaultLayout from './layout/DefaultLayout';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import AddCategory from './pages/Form/AddCategory';
+import SingleOrder from './pages/SingleOrder';
+import io from 'socket.io-client';
+
+export const socket = io('http://localhost:3000', {
+  auth: {
+    token: localStorage.getItem('token'),
+  },
+});
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,7 +48,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="eCommerce Dashboard" />
+              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <DefaultLayout>
                 <ECommerce />
               </DefaultLayout>
@@ -51,7 +59,7 @@ function App() {
           path="/calendar"
           element={
             <>
-              <PageTitle title="Calender" />
+              <PageTitle title="Calendar | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <DefaultLayout>
                 <Calendar />
               </DefaultLayout>
@@ -62,7 +70,7 @@ function App() {
           path="/profile"
           element={
             <DefaultLayout>
-              <PageTitle title="Profile " />
+              <PageTitle title="Profile | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Profile />
             </DefaultLayout>
           }
@@ -73,7 +81,7 @@ function App() {
             <DefaultLayout>
               {' '}
               <>
-                <PageTitle title="Form Elements" />
+                <PageTitle title="Form Elements | TailAdmin - Tailwind CSS Admin Dashboard Template" />
                 <FormElements />
               </>
             </DefaultLayout>
@@ -83,7 +91,7 @@ function App() {
           path="/forms/form-layout"
           element={
             <>
-              <PageTitle title="Form Layout" />
+              <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <DefaultLayout>
                 <FormLayout />
               </DefaultLayout>
@@ -94,7 +102,7 @@ function App() {
           path="/forms/add-category"
           element={
             <>
-              <PageTitle title="category Layout" />
+              <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <DefaultLayout>
                 <AddCategory />
               </DefaultLayout>
@@ -105,8 +113,21 @@ function App() {
           path="/tables"
           element={
             <>
-              <PageTitle title="Tables" />
-              <Tables />
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <DefaultLayout>
+                <Tables />
+              </DefaultLayout>
+            </>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <>
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <DefaultLayout>
+                <SingleOrder />
+              </DefaultLayout>
             </>
           }
         />
@@ -114,7 +135,7 @@ function App() {
           path="/settings"
           element={
             <>
-              <PageTitle title="Settings" />
+              <PageTitle title="Settings | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Settings />
             </>
           }
@@ -123,7 +144,7 @@ function App() {
           path="/chart"
           element={
             <>
-              <PageTitle title="Basic Chart" />
+              <PageTitle title="Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Chart />
             </>
           }
@@ -132,7 +153,7 @@ function App() {
           path="/ui/alerts"
           element={
             <>
-              <PageTitle title="Alerts" />
+              <PageTitle title="Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Alerts />
             </>
           }
@@ -141,7 +162,7 @@ function App() {
           path="/ui/buttons"
           element={
             <>
-              <PageTitle title="Buttons" />
+              <PageTitle title="Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Buttons />
             </>
           }
@@ -150,7 +171,6 @@ function App() {
           path="/login"
           element={
             <>
-              login
               <PageTitle title="login" />
               <SignIn />
             </>

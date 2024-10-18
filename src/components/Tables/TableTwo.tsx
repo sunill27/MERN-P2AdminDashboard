@@ -25,11 +25,14 @@ const TableTwo = () => {
         </h4>
       </div>
 
-      <div className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
-        <div className="col-span-3 flex items-center">
+      <div className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:px-6 2xl:px-7.5">
+        <div className="col-span-1 flex items-center">
+          <p className="font-medium">Product Image</p>
+        </div>
+        <div className="col-span-1 flex items-center">
           <p className="font-medium">Product Name</p>
         </div>
-        <div className="col-span-2 hidden items-center sm:flex">
+        <div className="col-span-1 hidden md:flex items-center">
           <p className="font-medium">Category</p>
         </div>
         <div className="col-span-1 flex items-center">
@@ -39,43 +42,47 @@ const TableTwo = () => {
           <p className="font-medium">Stocks</p>
         </div>
         <div className="col-span-1 flex items-center">
-          <p className="font-medium">Created_at</p>
+          <p className="font-medium">Created At</p>
         </div>
       </div>
 
       {products.length > 0 &&
         products.map((product, key) => (
           <div
-            className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
+            className="grid grid-cols-12 border-t border-stroke py-4 px-4 dark:border-strokedark sm:px-6 2xl:px-7.5"
             key={key}
           >
-            <div className="col-span-3 flex items-center">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                <div className="h-12.5 w-15 rounded-md">
-                  <img src={product.productImage} alt="Product" />
-                </div>
-                <p className="text-sm text-black dark:text-white">
-                  {product.productName}
-                </p>
+            <div className="col-span-2 flex items-center">
+              <div className="h-12 w-12 rounded-md overflow-hidden">
+                <img
+                  src={product.imageUrl}
+                  alt="Product"
+                  className="object-cover w-full h-full"
+                />
               </div>
             </div>
-            <div className="col-span-2 hidden items-center sm:flex">
+            <div className="col-span-2 flex items-center">
+              <p className="text-sm text-black dark:text-white">
+                {product.productName}
+              </p>
+            </div>
+            <div className="col-span-2 hidden md:flex items-center">
               <p className="text-sm text-black dark:text-white">
                 {product?.Category?.categoryName}
               </p>
             </div>
-            <div className="col-span-1 flex items-center">
+            <div className="col-span-2 flex items-center">
               <p className="text-sm text-black dark:text-white">
                 ${product.productPrice}
               </p>
             </div>
-            <div className="col-span-1 flex items-center">
+            <div className="col-span-2 flex items-center">
               <p className="text-sm text-black dark:text-white">
                 {product.productStock}
               </p>
             </div>
-            <div className="col-span-1 flex items-center">
-              <p className="text-sm text-meta-3">${product.createdAt}</p>
+            <div className="col-span-2 flex items-center">
+              <p className="text-sm text-meta-3">{product.createdAt}</p>
             </div>
           </div>
         ))}

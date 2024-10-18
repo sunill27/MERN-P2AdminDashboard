@@ -1,4 +1,4 @@
-import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
+import Breadcrumb from '../components/Breadcrumbs/Breadcrumb.tsx';
 import TableFour from '../components/Tables/TableFour';
 import TableOne from '../components/Tables/TableOne';
 import TableThree from '../components/Tables/TableThree';
