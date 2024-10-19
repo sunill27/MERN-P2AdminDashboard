@@ -8,6 +8,7 @@ const TableOne = () => {
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
+
   const handleDelete = (id: string) => {
     dispatch(deleteUser(id));
   };

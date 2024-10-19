@@ -10,6 +10,7 @@ const TableThree = () => {
   useEffect(() => {
     dispatch(fetchOrders());
   }, []);
+
   const handleDelete = (id: string) => {
     dispatch(deleteOrder(id));
   };

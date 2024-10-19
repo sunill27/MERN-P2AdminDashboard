@@ -313,7 +313,7 @@ export function deleteOrder(id: string) {
   return async function deleteOrderThunk(dispatch: AppDispatch) {
     dispatch(setStatus(Status.LOADING));
     try {
-      const response = await APIAuthenticated.delete('/order/admin' + id);
+      const response = await APIAuthenticated.delete('/order/admin/' + id);
       if (response.status === 200) {
         dispatch(setStatus(Status.SUCCESS));
         dispatch(setDeleteOrder({ orderId: id }));
