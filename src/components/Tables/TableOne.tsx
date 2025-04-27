@@ -19,7 +19,7 @@ const TableOne = () => {
       </h4>
 
       <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-4">
+        <div className="grid grid-cols-4 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-4">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">id</h5>
           </div>
@@ -33,7 +33,7 @@ const TableOne = () => {
               email
             </h5>
           </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
+          <div className="p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Action
             </h5>
@@ -43,7 +43,7 @@ const TableOne = () => {
         {users.length > 0 &&
           users.map((user, key) => (
             <div
-              className={`grid grid-cols-3 sm:grid-cols-4 ${
+              className={`grid grid-cols-4 sm:grid-cols-4 ${
                 key === users.length - 1
                   ? ''
                   : 'border-b border-stroke dark:border-strokedark'
@@ -51,7 +51,7 @@ const TableOne = () => {
               key={key}
             >
               <div className="flex items-center gap-3 p-2.5 xl:p-5">
-                <p className="hidden text-black dark:text-white sm:block">
+                <p className=" text-black dark:text-white sm:block">
                   {user.id}
                 </p>
               </div>
